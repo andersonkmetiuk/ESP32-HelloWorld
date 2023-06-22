@@ -9,7 +9,7 @@ board = wt32-eth01
 framework = arduino
 monitor_speed = 921600 
 ```
-
+To upload your software into the board you will need a USB to UART conversor. For that we will use the **CP2102**.
 * **CP2102** &rarr; USB to UART conversor connections:
   * TXD ESP32 &rarr; RXD CP2102
   * RXD ESP32 &rarr; TXD CP2102
