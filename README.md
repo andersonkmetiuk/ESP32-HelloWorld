@@ -9,3 +9,5 @@ board = wt32-eth01
 framework = arduino
 monitor_speed = 921600 
 ```
+
+**CP2102** &rarr; USB to UART conversor connections:
