@@ -1,5 +1,5 @@
 # ESP32HelloWorld
-Initial development for ESP32. Configuring Visual Studio with **PlatformIO** Extension.
+Initial development for **ESP32 WT32 ETH01 Board**. Configuring Visual Studio with **PlatformIO** Extension.
 
 Remember to set the **platform.ini** file with:
 ```
