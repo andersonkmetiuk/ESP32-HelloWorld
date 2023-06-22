@@ -19,3 +19,5 @@ To upload your software into the board you will need a USB to UART conversor. Fo
 
 ![cp2102-pins](/assets/images/CP2102-pins.jpeg)
 
+For the version with more pins and modes we use the following configuration:
+![cp2102-v2](/assets/images/CP2102-v2.jpeg)
