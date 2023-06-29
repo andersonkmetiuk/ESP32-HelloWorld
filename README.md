@@ -1,4 +1,4 @@
-# ESP32HelloWorld
+# ESP32 - Hello World
 Initial development for **ESP32 WT32 ETH01 Board**. 
 
 Configuring Visual Studio with [PlatformIO Extension](https://platformio.org/install/ide?install=vscode). Remember to set the **platform.ini** file with:
