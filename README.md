@@ -34,6 +34,14 @@ framework = arduino
 monitor_speed = 921600 
 ```
 
+For Linux you might need to run this command
+```
+sudo apt-get install python3-venv
+```
+[Here's why](https://github.com/platformio/platformio-core-installer/issues/1774)
+
+---
+
 [PlatformIO Configuration](https://docs.platformio.org/en/latest/boards/espressif32/wt32-eth01.html)
 
 To upload your software into the board you will need a USB to UART conversor. For that we will use the **CP2102**.
