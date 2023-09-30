@@ -60,3 +60,34 @@ To upload your software into the board you will need a USB to UART conversor. Fo
 For the version with more pins and modes we use the following configuration:
 
 ![cp2102-v2](/assets/images/CP2102-v2.jpg)
+
+## Examples
+
+### Branch: Bluetooth
+This is the [guide](https://randomnerdtutorials.com/esp32-bluetooth-classic-arduino-ide/) that I have followed to set up the Bluetooth.
+```
+#include <Arduino.h>
+#include "BluetoothSerial.h"
+
+#if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
+#error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
+#endif
+
+BluetoothSerial SerialBT;
+
+void setup() {
+  Serial.begin(115200);
+  SerialBT.begin("ESP32test"); //Bluetooth device name
+  Serial.println("The device started, now you can pair it with bluetooth!");
+}
+
+void loop() {
+  if (Serial.available()) {
+    SerialBT.write(Serial.read());
+  }
+  if (SerialBT.available()) {
+    Serial.write(SerialBT.read());
+  }
+  delay(20);
+}
+```
