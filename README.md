@@ -134,6 +134,27 @@ static const uint8_t SCL = 32;
 ```
 ## Examples
 
+### Branch: Basic-Configurations
+```
+/*Project by Anderson Kmetiuk
+  Board --> ESP32 WT32 ETH01 
+  This is the branch for the Basic Configurations
+  It's for configuring the basics for the Board
+*/
+#include <Arduino.h>
+
+void setup() {
+  Serial.begin(921600);
+  Serial.println("Inicio");
+
+}
+
+void loop() {
+  delay(2000);
+  Serial.println("Hello");
+}
+```
+
 ### Branch: Bluetooth
 This is the [guide](https://randomnerdtutorials.com/esp32-bluetooth-classic-arduino-ide/) I have followed to set up the Bluetooth.
 ```
