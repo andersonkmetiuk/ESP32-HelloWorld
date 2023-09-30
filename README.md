@@ -33,6 +33,7 @@ board = wt32-eth01
 framework = arduino
 monitor_speed = 921600 
 ```
+If you have another model of ESP32 you cand find the supported list [here](https://registry.platformio.org/platforms/platformio/espressif32/boards)
 
 For Linux you might need to run this command
 ```
