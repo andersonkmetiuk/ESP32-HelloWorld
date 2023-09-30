@@ -1,6 +1,8 @@
 # ESP32 - Hello World
 Initial development for **ESP32 WT32 ETH01 Board**. 
 
+![Esp32-pinout](/assets/images/esp32-pinout.jpg)
+
 ## Specifications:
 
 - Supply voltage: 3.3V DC (via 3V3 pin) or 5V DC (via 5V pin)
