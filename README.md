@@ -64,6 +64,7 @@ For the version with more pins and modes we use the following configuration:
 ![cp2102-v2](/assets/images/CP2102-v2.jpg)
 
 ## Pin Reference in Arduino.h
+[Source](https://github.com/espressif/arduino-esp32/blob/master/variants/wt32-eth01/pins_arduino.h)
 ```
 #ifndef Pins_Arduino_h
 #define Pins_Arduino_h
