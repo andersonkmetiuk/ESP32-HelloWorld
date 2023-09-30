@@ -24,6 +24,8 @@ Initial development for **ESP32 WT32 ETH01 Board**.
   - Transfer rate: 10/100Mbps
   - Connector: RJ45
 - USB to serial converter: None (use an external one)
+
+You can check the [documentation folder](https://github.com/andersonkmetiuk/ESP32-HelloWorld/tree/main/documentation) for more information.
     
 ## Configuration
 
