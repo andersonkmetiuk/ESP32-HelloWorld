@@ -1,7 +1,6 @@
 /*Project by Anderson Kmetiuk
   Board --> ESP32 WT32 ETH01 
   This is the branch for the Basic Configurations
-  It's for configuring the basics for the Board
 */
 #include <Arduino.h>
 
