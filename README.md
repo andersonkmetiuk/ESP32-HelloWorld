@@ -135,7 +135,7 @@ static const uint8_t SCL = 32;
 ## Examples
 
 ### Branch: Bluetooth
-This is the [guide](https://randomnerdtutorials.com/esp32-bluetooth-classic-arduino-ide/) that I have followed to set up the Bluetooth.
+This is the [guide](https://randomnerdtutorials.com/esp32-bluetooth-classic-arduino-ide/) I have followed to set up the Bluetooth.
 ```
 #include <Arduino.h>
 #include "BluetoothSerial.h"
