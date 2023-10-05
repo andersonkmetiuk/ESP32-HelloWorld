@@ -257,6 +257,49 @@ void loop() {
 }
 ```
 
+### Branch: Button-Blinky
+```
+#include <Arduino.h>
+//Press the Button to turn both LEDs ON/OFF
+
+// defines
+#define LED1 14 // IO14
+#define LED2 15 // IO15
+#define BUTTON 39 //Input Only Pins - IO35, IO36 or IO39
+
+//global var
+unsigned int state1 = 1,state2 = 0; //change LED state
+unsigned int pressB = 0; //button presses
+
+
+void setup() {
+  //Pins Setup
+  pinMode(LED1,OUTPUT);
+  digitalWrite(LED1, HIGH);
+  pinMode(LED2,OUTPUT);
+  digitalWrite(LED2, LOW);
+  pinMode(BUTTON, INPUT);
+  Serial.begin(9600);
+  Serial.println("Begin...");
+}
+
+void loop() {
+  //check if the button is pressed then change the state of the LEDs to ON/OFF
+  if(digitalRead(BUTTON))
+  {
+    state1 = !state1;
+    state2 = !state2;
+    Serial.println("Button");
+    digitalWrite(LED1,state1);
+    digitalWrite(LED2,state2);
+    pressB++; //increment button press
+    Serial.println(pressB);
+    delay(100); //debounce
+  }
+  delay(100); //debounce
+}
+```
+
 ### Branch: Bluetooth
 This is the [guide](https://randomnerdtutorials.com/esp32-bluetooth-classic-arduino-ide/) I have followed to set up the Bluetooth.
 ```
