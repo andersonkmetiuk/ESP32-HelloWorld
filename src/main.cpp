@@ -10,7 +10,6 @@
 #define LED4 32 // IO32
 #define LED5 4 // IO4
 #define LED6 2 // IO2
-#define BUTTON 36 //Input Only Pins - IO35, IO36 or IO39
 
 void setup() {
   //Pins Setup
