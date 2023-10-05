@@ -7,17 +7,17 @@
 // defines
 #define LED1 14 // IO14
 #define LED2 15 // IO15
-#define BUTTON 36 //Input Only Pins - IO35, IO36 or IO39
+#define BUTTON 39 //Input Only Pins - IO35, IO36 or IO39
 
 //global var
-unsigned int state = 0; //change LED state
+unsigned int state1 = 1,state2 = 0; //change LED state
 unsigned int pressB = 0; //button presses
 
 
 void setup() {
   //Pins Setup
   pinMode(LED1,OUTPUT);
-  digitalWrite(LED1, LOW);
+  digitalWrite(LED1, HIGH);
   pinMode(LED2,OUTPUT);
   digitalWrite(LED2, LOW);
   pinMode(BUTTON, INPUT);
@@ -29,10 +29,11 @@ void loop() {
   //check if the button is pressed then change the state of the LEDs to ON/OFF
   if(digitalRead(BUTTON))
   {
-    state = !state;
+    state1 = !state1;
+    state2 = !state2;
     Serial.println("Button");
-    digitalWrite(LED1,state);
-    digitalWrite(LED2,state);
+    digitalWrite(LED1,state1);
+    digitalWrite(LED2,state2);
     pressB++; //increment button press
     Serial.println(pressB);
     delay(100); //debounce
