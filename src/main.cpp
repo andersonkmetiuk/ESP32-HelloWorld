@@ -1,35 +1,41 @@
-/* Project by Anderson Kmetiuk
-   Board --> ESP32 WT32 ETH01
-   The main purpose of this repo is to test the basic features of the board
-   and try simple projects just to get use to
+/*Project by Anderson Kmetiuk
+  Board --> ESP32 WT32 ETH01 
 */
 #include <Arduino.h>
-//This example code is in the Public Domain (or CC0 licensed, at your option.)
-//By Evandro Copercini - 2018
-//
-//This example creates a bridge between Serial and Classical Bluetooth (SPP)
-//and also demonstrate that SerialBT have the same functionalities of a normal Serial
+//Press the Button to turn both LEDs ON/OFF
 
-#include "BluetoothSerial.h"
+// defines
+#define LED1 14 // IO14
+#define LED2 15 // IO15
+#define BUTTON 36 //Input Only Pins - IO35, IO36 or IO39
 
-#if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
-#error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
-#endif
+//global var
+unsigned int state = 0; //change LED state
+unsigned int pressB = 0; //button presses
 
-BluetoothSerial SerialBT;
 
 void setup() {
-  Serial.begin(115200);
-  SerialBT.begin("ESP32test"); //Bluetooth device name
-  Serial.println("The device started, now you can pair it with bluetooth!");
+  //Pins Setup
+  pinMode(LED1,OUTPUT);
+  digitalWrite(LED1, LOW);
+  pinMode(LED2,OUTPUT);
+  digitalWrite(LED2, LOW);
+  pinMode(BUTTON, INPUT);
+  Serial.begin(9600);
+  Serial.println("Begin...");
 }
 
 void loop() {
-  if (Serial.available()) {
-    SerialBT.write(Serial.read());
+  //check if the button is pressed then change the state of the LEDs to ON/OFF
+  if(digitalRead(BUTTON))
+  {
+    state = !state;
+    Serial.println("Button");
+    digitalWrite(LED1,state);
+    digitalWrite(LED2,state);
+    pressB++; //increment button press
+    Serial.println(pressB);
+    delay(100); //debounce
   }
-  if (SerialBT.available()) {
-    Serial.write(SerialBT.read());
-  }
-  delay(20);
+  delay(100); //debounce
 }
