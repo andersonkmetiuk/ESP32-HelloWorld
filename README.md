@@ -1,7 +1,7 @@
 # ESP32 - Hello World
 Initial development for **ESP32 WT32 ETH01 Board**. 
 
-![Esp32-pinout](/assets/images/esp32-pinout.jpg)
+![Esp32-pinout](/assets/images/wt32-eth01-pinout.png)
 
 ## Specifications:
 
