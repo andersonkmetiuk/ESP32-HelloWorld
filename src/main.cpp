@@ -1,35 +1,35 @@
 /* Project by Anderson Kmetiuk
    Board --> ESP32 WT32 ETH01
-   The main purpose of this repo is to test the basic features of the board
-   and try simple projects just to get use to
 */
 #include <Arduino.h>
-//This example code is in the Public Domain (or CC0 licensed, at your option.)
-//By Evandro Copercini - 2018
-//
-//This example creates a bridge between Serial and Classical Bluetooth (SPP)
-//and also demonstrate that SerialBT have the same functionalities of a normal Serial
+#include <HardwareSerial.h>
 
-#include "BluetoothSerial.h"
+#define RXPIN 5
+#define TXPIN 17
+#define LED1 14 // IO14 pin
 
-#if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
-#error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
-#endif
-
-BluetoothSerial SerialBT;
+unsigned int state = 0; //change LED state
+char received = '0';
+HardwareSerial SerialPort(2);  //if using UART2
 
 void setup() {
-  Serial.begin(115200);
-  SerialBT.begin("ESP32test"); //Bluetooth device name
-  Serial.println("The device started, now you can pair it with bluetooth!");
+  pinMode(LED1,OUTPUT);
+  digitalWrite(LED1, LOW);
+  Serial.begin(9600);
+
+  //SerialPort.begin (BaudRate, SerialMode, RX_pin, TX_pin)
+  SerialPort.begin(9600, SERIAL_8N1, RXPIN, TXPIN);
+  Serial.println("Begin...");
 }
 
 void loop() {
-  if (Serial.available()) {
-    SerialBT.write(Serial.read());
+  if (SerialPort.available())
+  {
+     received = SerialPort.read();
+    if (received == 'A') {
+      state = !state;
+      Serial.println("Arduino");
+      digitalWrite(LED1, state);
+    }
   }
-  if (SerialBT.available()) {
-    Serial.write(SerialBT.read());
-  }
-  delay(20);
 }
