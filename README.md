@@ -29,7 +29,7 @@ You can check the [documentation folder](https://github.com/andersonkmetiuk/ESP3
     
 ## Configuration
 
-Configuring Visual Studio with [PlatformIO Extension](https://platformio.org/install/ide?install=vscode). Remember to set the **platform.ini** file with:
+Configuring Visual Studio with [PlatformIO Extension](https://platformio.org/install/ide?install=vscode). Remember to set the `platform.ini` file with:
 ```
 [env:wt32-eth01]
 platform = espressif32@4.2.0
@@ -297,6 +297,71 @@ void loop() {
     delay(100); //debounce
   }
   delay(100); //debounce
+}
+```
+### Branch: Communication-Arduino
+Let's try to send a message with an `Arduino Nano` and then get a response and blink a LED with the `ESP32`. I have used this [guide](https://microcontrollerslab.com/esp32-uart-communication-pins-example/) as a reference.
+
+#### Arduino Nano
+There are a few steps for the Arduino. If you want just a quick test you can use [this](https://github.com/andersonkmetiuk/ArduinoNano-HelloWorld/tree/Communication-ESP32) as a reference and burn it into your `Arduino Nano`.
+
+If you want to do it yourself. Remember to set the `platform.ini` like so
+```
+[env:nanoatmega328]
+platform = atmelavr
+board = nanoatmega328new
+framework = arduino
+```
+We are going to use a simple loop just to send the letter 'A' through the UART
+```
+#include <Arduino.h>
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Begin...");
+}
+
+void loop() {
+ Serial.println("A"); //Sends data to the ESP32 through UART
+ delay(5000);
+}
+```
+
+### ESP32
+For the `ESP32` we are going to use the library `HardwareSerial` to set the second UART to receive the data like so
+
+```
+#include <Arduino.h>
+#include <HardwareSerial.h>
+
+#define RXPIN 5
+#define TXPIN 17
+#define LED1 14 // IO14 pin
+
+unsigned int state = 0; //change LED state
+char received = '0';
+HardwareSerial SerialPort(2);  //if using UART2
+
+void setup() {
+  pinMode(LED1,OUTPUT);
+  digitalWrite(LED1, LOW);
+  Serial.begin(9600);
+
+  //SerialPort.begin (BaudRate, SerialMode, RX_pin, TX_pin)
+  SerialPort.begin(9600, SERIAL_8N1, RXPIN, TXPIN);
+  Serial.println("Begin...");
+}
+
+void loop() {
+  if (SerialPort.available())
+  {
+     received = SerialPort.read();
+    if (received == 'A') {
+      state = !state;
+      Serial.println("Arduino");
+      digitalWrite(LED1, state);
+    }
+  }
 }
 ```
 
