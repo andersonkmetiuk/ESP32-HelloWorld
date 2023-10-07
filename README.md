@@ -1,5 +1,5 @@
 # ESP32 - Hello World
-Initial development for **ESP32 WT32 ETH01 Board**. 
+Initial development for `ESP32 WT32 ETH01` Board. 
 
 ![Esp32-pinout](/assets/images/wt32-eth01-pinout.png)
 
@@ -37,7 +37,7 @@ board = wt32-eth01
 framework = arduino
 monitor_speed = 921600 
 ```
-If you have another model of ESP32 you cand find the supported list [here](https://registry.platformio.org/platforms/platformio/espressif32/boards)
+If you have another model of `ESP32` you cand find the supported list [here](https://registry.platformio.org/platforms/platformio/espressif32/boards)
 
 [PlatformIO Configuration](https://docs.platformio.org/en/latest/boards/espressif32/wt32-eth01.html)
 
@@ -49,7 +49,8 @@ sudo apt-get install python3-venv
 
 ---
 ## Software Burn with CP2102 (USB - UART module)
-To upload your software into the board you will need a USB to UART conversor. For that we will use the **CP2102**.
+To upload your software into the board you will need a USB to UART conversor. For that we will use the `CP2102`.
+
 * **CP2102** &rarr; USB to UART conversor connections:
   * TXD ESP32 &rarr; RXD CP2102
   * RXD ESP32 &rarr; TXD CP2102
