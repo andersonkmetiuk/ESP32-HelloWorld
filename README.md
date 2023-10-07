@@ -327,7 +327,7 @@ void loop() {
 }
 ```
 
-### ESP32
+#### ESP32
 For the `ESP32` we are going to use the library `HardwareSerial` to set the second UART to receive the data like so
 
 ```
