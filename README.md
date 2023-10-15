@@ -8,5 +8,4 @@ I'm following this [tutorial.](https://microcontrollerslab.com/esp32-uart-commun
 platform = espressif32@4.2.0
 board = wt32-eth01
 framework = arduino
-monitor_speed = 921600 
 ```
