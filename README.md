@@ -35,7 +35,6 @@ Configuring Visual Studio with [PlatformIO Extension](https://platformio.org/ins
 platform = espressif32@4.2.0
 board = wt32-eth01
 framework = arduino
-monitor_speed = 921600 
 ```
 If you have another model of `ESP32` you cand find the supported list [here](https://registry.platformio.org/platforms/platformio/espressif32/boards)
 
