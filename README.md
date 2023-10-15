@@ -25,6 +25,8 @@ Initial development for `ESP32 WT32 ETH01` Board.
   - Connector: RJ45
 - USB to serial converter: None (use an external one)
 
+![WT32-ETH01-specs](/assets/images/wt32-specs.png)
+
 You can check the [documentation folder](https://github.com/andersonkmetiuk/ESP32-HelloWorld/tree/main/documentation) for more information.
     
 ## Configuration
