@@ -395,3 +395,35 @@ void loop() {
   delay(20);
 }
 ```
+
+### Branch: Wifi
+```
+#include <Arduino.h>
+#include <WiFi.h>
+#include <Update.h>
+#include "secrets.h"
+
+const char* ssid = NETWORK_NAME;
+const char* password =  NETWORK_PASSWORD;
+
+void setup() {
+ Serial.begin(115200);
+ WiFi.begin(ssid, password);
+ 
+ while (WiFi.status() != WL_CONNECTED) {
+  delay(500);
+  Serial.println("Connecting to WiFi..");
+ }
+ Serial.println("Connected to the WiFi network");
+ Serial.print("IP: ");
+ Serial.println(WiFi.localIP());
+}
+ 
+void loop() {}
+```
+
+You need to have a file `secrets.h` that has only
+```
+#define NETWORK_NAME "your_network_name"
+#define NETWORK_PASSWORD "your_network_password"
+```
