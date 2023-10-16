@@ -20,7 +20,7 @@ void setup() {
   Serial.println("Connecting to WiFi..");
  }
  Serial.println("Connected to the WiFi network");
- Serial.println("Endereço de IP: ");
+ Serial.print("IP: ");
  Serial.println(WiFi.localIP());
 }
  
