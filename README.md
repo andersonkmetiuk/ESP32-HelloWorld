@@ -48,6 +48,7 @@ sudo apt-get install python3-venv
 ```
 [Here's why](https://github.com/platformio/platformio-core-installer/issues/1774)
 
+You can check here if you want a step by step [tutorial](https://randomnerdtutorials.com/vs-code-platformio-ide-esp32-esp8266-arduino/)
 ---
 ## Software Burn with CP2102 (USB - UART module)
 To upload your software into the board you will need a USB to UART conversor. For that we will use the `CP2102`.
