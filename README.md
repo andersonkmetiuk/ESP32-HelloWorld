@@ -48,7 +48,7 @@ sudo apt-get install python3-venv
 ```
 [Here's why](https://github.com/platformio/platformio-core-installer/issues/1774)
 
-You can check here if you want a step by step [tutorial](https://randomnerdtutorials.com/vs-code-platformio-ide-esp32-esp8266-arduino/)
+You can check [here]((https://randomnerdtutorials.com/vs-code-platformio-ide-esp32-esp8266-arduino/)) if you want a step by step tutorial.
 
 ---
 ## Software Burn with CP2102 (USB - UART module)
