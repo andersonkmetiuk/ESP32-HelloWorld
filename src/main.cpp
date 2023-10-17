@@ -4,32 +4,85 @@
    and try simple projects just to get use to
 */
 #include <Arduino.h>
-//This example code is in the Public Domain (or CC0 licensed, at your option.)
-//By Evandro Copercini - 2018
-//
-//This example creates a bridge between Serial and Classical Bluetooth (SPP)
-//and also demonstrate that SerialBT have the same functionalities of a normal Serial
+#include <Update.h>
+/*
+    This sketch shows the Ethernet event usage
 
-#include "BluetoothSerial.h"
+*/
 
-#if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
-#error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
-#endif
+#include <ETH.h>
 
-BluetoothSerial SerialBT;
+static bool eth_connected = false;
 
-void setup() {
-  Serial.begin(115200);
-  SerialBT.begin("ESP32test"); //Bluetooth device name
-  Serial.println("The device started, now you can pair it with bluetooth!");
+void WiFiEvent(WiFiEvent_t event)
+{
+  switch (event) {
+    case ARDUINO_EVENT_ETH_START:
+      Serial.println("ETH Started");
+      //set eth hostname here
+      ETH.setHostname("esp32-ethernet");
+      break;
+    case ARDUINO_EVENT_ETH_CONNECTED:
+      Serial.println("ETH Connected");
+      break;
+    case ARDUINO_EVENT_ETH_GOT_IP:
+      Serial.print("ETH MAC: ");
+      Serial.print(ETH.macAddress());
+      Serial.print(", IPv4: ");
+      Serial.print(ETH.localIP());
+      if (ETH.fullDuplex()) {
+        Serial.print(", FULL_DUPLEX");
+      }
+      Serial.print(", ");
+      Serial.print(ETH.linkSpeed());
+      Serial.println("Mbps");
+      eth_connected = true;
+      break;
+    case ARDUINO_EVENT_ETH_DISCONNECTED:
+      Serial.println("ETH Disconnected");
+      eth_connected = false;
+      break;
+    case ARDUINO_EVENT_ETH_STOP:
+      Serial.println("ETH Stopped");
+      eth_connected = false;
+      break;
+    default:
+      break;
+  }
 }
 
-void loop() {
-  if (Serial.available()) {
-    SerialBT.write(Serial.read());
+void testClient(const char * host, uint16_t port)
+{
+  Serial.print("\nconnecting to ");
+  Serial.println(host);
+
+  WiFiClient client;
+  if (!client.connect(host, port)) {
+    Serial.println("connection failed");
+    return;
   }
-  if (SerialBT.available()) {
-    Serial.write(SerialBT.read());
+  client.printf("GET / HTTP/1.1\r\nHost: %s\r\n\r\n", host);
+  while (client.connected() && !client.available());
+  while (client.available()) {
+    Serial.write(client.read());
   }
-  delay(20);
+
+  Serial.println("closing connection\n");
+  client.stop();
+}
+
+void setup()
+{
+  Serial.begin(115200);
+  WiFi.onEvent(WiFiEvent);
+  ETH.begin();
+}
+
+
+void loop()
+{
+  if (eth_connected) {
+    testClient("google.com", 80);
+  }
+  delay(10000);
 }
