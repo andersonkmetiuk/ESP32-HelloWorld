@@ -4,32 +4,76 @@
    and try simple projects just to get use to
 */
 #include <Arduino.h>
-//This example code is in the Public Domain (or CC0 licensed, at your option.)
-//By Evandro Copercini - 2018
-//
-//This example creates a bridge between Serial and Classical Bluetooth (SPP)
-//and also demonstrate that SerialBT have the same functionalities of a normal Serial
 
-#include "BluetoothSerial.h"
+#include <secrets.h> //passwords - This file is in the .gitignore
+//just create a file with #define and the value of password and network name
 
-#if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
-#error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
-#endif
+#include <ArduinoOTA.h>
+#include <WiFi.h>
+#include <TelnetStream.h>
 
-BluetoothSerial SerialBT;
+#define LED 14
+#define LEDTIME 500
+
+const char ssid[] = SECRET_SSID;    // your network SSID (name)
+const char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
 
 void setup() {
   Serial.begin(115200);
-  SerialBT.begin("ESP32test"); //Bluetooth device name
-  Serial.println("The device started, now you can pair it with bluetooth!");
+
+  //WIFI
+  Serial.print("Attempting to connect to WPA SSID: ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, pass);
+  // Wait for WiFi connection
+  if (WiFi.waitForConnectResult() != WL_CONNECTED) {
+    Serial.println("Failed to connect.");
+    while (1) {
+      delay(10);
+    }
+  }
+
+  IPAddress ip = WiFi.localIP();
+  Serial.println();
+  Serial.println("Connected to WiFi network.");
+  Serial.print("Connect with Telnet client to ");
+  Serial.println(ip);
+
+  TelnetStream.begin();
+
+  //OTA
+  ArduinoOTA.setHostname("ESP32-OTA");
+  ArduinoOTA.begin();
+
+  // LED Setup
+  pinMode(LED,OUTPUT);
+  digitalWrite(LED, LOW);
 }
 
 void loop() {
-  if (Serial.available()) {
-    SerialBT.write(Serial.read());
+  //OTA Handler
+  ArduinoOTA.handle();
+
+  switch (TelnetStream.read()) {
+    case 'R':
+    TelnetStream.stop();
+    delay(100);
+    ESP.restart();
+      break;
+    case 'C':
+      TelnetStream.println("bye bye");
+      TelnetStream.stop();
+      break;
   }
-  if (SerialBT.available()) {
-    Serial.write(SerialBT.read());
-  }
-  delay(20);
+
+  //Simple Test
+  TelnetStream.println("LED ON");
+  digitalWrite(LED, HIGH);
+  delay(LEDTIME);
+  TelnetStream.println("LED OFF");
+  TelnetStream.println("--------");
+  digitalWrite(LED,LOW);
+  delay(LEDTIME);
 }
+
+
