@@ -172,6 +172,8 @@ void loop() {
 }
 ```
 
+---
+
 ### Branch: 6-LED
 ```
 #include <Arduino.h>
@@ -261,6 +263,8 @@ void loop() {
 }
 ```
 
+---
+
 ### Branch: Button-Blinky
 ```
 #include <Arduino.h>
@@ -303,6 +307,9 @@ void loop() {
   delay(100); //debounce
 }
 ```
+
+---
+
 ### Branch: Communication-Arduino
 Let's try to send a message with an `Arduino Nano` and then get a response and blink a LED with the `ESP32`. I have used this [guide](https://microcontrollerslab.com/esp32-uart-communication-pins-example/) as a reference.
 
@@ -369,6 +376,8 @@ void loop() {
 }
 ```
 
+---
+
 ### Branch: Bluetooth
 This is the [guide](https://randomnerdtutorials.com/esp32-bluetooth-classic-arduino-ide/) I have followed to set up the Bluetooth.
 ```
@@ -397,6 +406,8 @@ void loop() {
   delay(20);
 }
 ```
+
+---
 
 ### Branch: Wifi
 ```
@@ -429,6 +440,8 @@ You need to have a file `secrets.h` that has only
 #define NETWORK_NAME "your_network_name"
 #define NETWORK_PASSWORD "your_network_password"
 ```
+
+---
 
 ### Branch: Ethernet
 Basic test example for ethernet
@@ -512,6 +525,8 @@ void loop()
   delay(10000);
 }
 ```
+
+---
 
 ### Branch: Wifi-Telnet-OTA
 
@@ -641,3 +656,4 @@ For the Telnet part I have used `Putty`. It's very simple. You just need to past
 
 If you don't know the `ip` assigned the best way to figure it out is entering your modem using the default ip for access and the user and password. Usually these informations are written in your modem.
 
+---
