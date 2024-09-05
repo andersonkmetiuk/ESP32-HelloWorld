@@ -1,5 +1,5 @@
-# 6 LED
-This is the branch that test 6 LEDs (Outputs)
+# Millis Blink 
+This is the branch that blink LEDs using the millis() function
 
 ```
 [env:wt32-eth01]
